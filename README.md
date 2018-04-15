@@ -10,3 +10,14 @@
 * create database on port 27019
 * db name Tasker
 * collection name Tasks
+
+
+### How to add Task
+
+* Post request to: http://localhost:8888/task
+
+* With query:
+
+{
+	"task" : "test task"
+}
