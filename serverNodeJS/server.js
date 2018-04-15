@@ -65,7 +65,7 @@ mongo.connect("mongodb://localhost:27019", function (err,conn) {
                         rep.end(JSON.stringify({error : "Not implemeted"}));
                 }
                 break;
-            case '/task':
+            case '/addTask':
                 switch (req.method){
                     case 'POST':
                         var data = '';
@@ -95,6 +95,31 @@ mongo.connect("mongodb://localhost:27019", function (err,conn) {
                         rep.writeHead(501,'Not implemeted',{'Content-type':'application/json'});
                         rep.end(JSON.stringify({error : "Not implemeted"}));
                 }
+                break;
+            case '/editTask':
+                switch (req.method){
+                    case 'POST':
+                            console.log("POST");
+                            var data = '';
+                            req.on('data', function (part) {
+                                data += part;
+                            }).on('end', function () {
+                                console.log(ObjectId(data._id));
+                                tasks.findOne({_id: ObjectId(data._id)}, function (err, task) {
+                                    if(err){
+                                        console.log("Error " + err);
+                                    }else{
+                                        console.log("Task " +task);
+                                    }
+                                })
+
+                            })
+                        break;
+                    default:
+                        rep.writeHead(501,'Not implemeted',{'Content-type':'application/json'});
+                        rep.end(JSON.stringify({error : "Not implemeted"}));
+                }
+
                 break;
             default:
                 if(/^\/(html|css|js|fonts|img)\//.test(req.url)) {

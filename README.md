@@ -11,10 +11,13 @@
 * db name Tasker
 * collection name Tasks
 
+### How to get Tasks
+
+* Get request http://localhost:8888/tasks
 
 ### How to add Task
 
-* Post request to: http://localhost:8888/task
+* Post request to: http://localhost:8888/addTask
 
 * With query:
 
