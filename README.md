@@ -2,8 +2,9 @@
 ### Steps:
 * npm install nodejs
 * npm install mongodb
+* npm install meime
 * cd
-* mongod --port 27019 --dbpath workspace/web/taskerNodeJS/data/db/
+* mongod --port 27019 --dbpath workspace/web/taskerNodeJS/web/data/db/
 
 ### Config robo 3T:
 * create database on port 27019
