@@ -68,8 +68,32 @@ mongo.connect("mongodb://localhost:27019", function (err,conn) {
             case '/task':
                 switch (req.method){
                     case 'POST':
+                        var data = '';
+                        req.on('data', function (part) {
+                            data +=part;
+                        }).on('end',function () {
+                            var arg = JSON.parse(data);
+                            console.log(arg);
+                            var newTask = {
+                                _id: new ObjectId(),
+                                data: new Date(),
+                                task: arg.task
+                            };
+                            tasks.insertOne(newTask, function (error, succes) {
+                                if(error){
+                                    console.log("Error " +error);
+                                }else{
+                                    rep.end(JSON.stringify({status: 'success'}));
+                                }
+                            });
+                            rep.writeHead(200, 'OK', {'Content-type': 'application/json'});
+                        });
+
 
                         break;
+                    default:
+                        rep.writeHead(501,'Not implemeted',{'Content-type':'application/json'});
+                        rep.end(JSON.stringify({error : "Not implemeted"}));
                 }
                 break;
             default:
